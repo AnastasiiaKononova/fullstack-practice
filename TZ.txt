@@ -1,0 +1,23 @@
+Chat Task
+ 
+ User
+ - firstName: String,
+ - lastName: String
+ *- email: String
+ *- password: String
+ - birthday: Date
+ - imagePath: String
+ 
+ Chat
+ - name: String
+ - members: [User],
+ - imagePath: String
+ 
+ Message
+ - author: User
+ - body: String
+ - status: Boolean,
+ - chat: Chat
+ 
+ Task: розробити моделі для Mongoose
+ Зробити контроллери на створення чату, відправку повідомлення в чат
