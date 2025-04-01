@@ -13,11 +13,11 @@ module.exports.createOne = async (req, res, next) => {
 module.exports.addMessage = async (req, res, next) => {
     try {
         const {body, params: {chatId}} = req;
-        const newMessageInstanse = await Message.create({...body, chat: chatId});
-        const chatInstanse = await Chat.findById(chatId);
-        chatInstanse.message.push(newMessageInstanse);
-        await chatInstanse.save();
-        res.status(201).send({data: newMessageInstanse});
+        const newMessageInstance = await Message.create({...body, chat: chatId});
+        const chatInstance = await Chat.findById(chatId);
+        chatInstance.message.push(newMessageInstance);
+        await chatInstance.save();
+        res.status(201).send({data: newMessageInstance});
     } catch(error) {
         next(error)
     }
