@@ -1,6 +1,6 @@
 const {User, Chat, Message} = require('../models');
 
-module.exports.createOne = async (req, res, next) => {
+module.exports.createChat = async (req, res, next) => {
     try {
         const {body} = req;
         const chat = await Chat.create(body);
@@ -18,6 +18,36 @@ module.exports.addMessage = async (req, res, next) => {
         chatInstance.message.push(newMessageInstance);
         await chatInstance.save();
         res.status(201).send({data: newMessageInstance});
+    } catch(error) {
+        next(error)
+    }
+}
+
+module.exports.getAllUserChats = async(req, res, next) => {
+    try {
+        const {payload: {userId}} = req;
+        const allUserChats = await Chat.find({
+            members: userId
+        });
+        res.status(200).send({data: allUserChats})
+    } catch(error) {
+        next(error);
+    }
+}
+
+module.exports.addUserToChat = async (req,res, next) => {
+    try {
+        const {params: {chatId, userId}} = req;
+        const foundChat = await Chat.findById(chatId);
+        if(!foundChat) {
+            throw new Error('Chat not found');
+        }
+        const userInstance = await User.findById(userId);
+        foundChat.members.push(userInstance);
+        await foundChat.save();
+        res.status(200).send({
+            data: 'ok'
+        })
     } catch(error) {
         next(error)
     }

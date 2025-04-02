@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
 const { deletePassword } = require("../utils/deletePassword");
-const {createToken} = require('../service/tokenService');
+const { createToken } = require("../service/tokenService");
 
 /*
  Авторизація та аутентифікація юзера
@@ -41,42 +41,51 @@ module.exports.signUp = async (req, res, next) => {
     // TODO: створити сесію юзера
 
     const token = await createToken(readyUser.id, readyUser.email);
-    res.status(201).send({data: readyUser, token});
+    res.status(201).send({ data: readyUser, token });
   } catch (error) {
     next(error);
   }
 };
 
+/*
+ За потреби "підтвердження реєстрації" можемо зробити так:
+ 1. При основній реєстрації замість створення обліковки генерувати токен зі всією інформацією в payload,
+ у відповідь надсилати просто статичну сторінку "перевірте пошту та продовжіть реєстрацію".
+ 2. На вказану пошту надсилається згенерований лист, який містить "кнопку", що відправить на сервер токен зі всією необхідною інформацією. Якщо все співпадає - створюєте в БД сутність юзера і відповідаєте йому про успішне підтвердженя
+ 
+ */
+
 module.exports.signIn = async (req, res, next) => {
   try {
-
-   //   1. Прийняти інформацію юзера
-      const {body: {email, password}} = req;
-   //   2. Знайти юзера в БД за допомогою інфи, яка прийшла разом з запитом (напр, мейл)
-   const foundUser = await User.findOne({
-      email
-   });
-   if (!foundUser) {
-   //       - якщо такого юзера немає - відповідаємо помилкою (404/400)
-      throw new Error('User not found');  // ось тут може бути ваша помилка
-   }
-   //   3. Якщо такий юзер є - перевіряємо правильність пароля
-   // перевірити відповідність пароля можна за допомогою хешованої перевірки
-   const result = await bcrypt.compare(password, foundUser.passwordHash);
-   console.log(result); // result - true, якщо співпадають, false якщо ні
-        //       - якщо пароль не співпав - відповідаємо помилкою (400)
-      if(!result) {
-          throw new Error('Invalid data');
-      }
-   //   4. Якщо пароль співпав - створюємо сесію юзера і генеруємо для нього токен для всіх подальших запитів
-      const token = await createToken(foundUser.id, foundUser.email);
-      res.status(200).send({data: deletePassword(foundUser), token})
+    //   1. Прийняти інформацію юзера
+    const {
+      body: { email, password },
+    } = req;
+    //   2. Знайти юзера в БД за допомогою інфи, яка прийшла разом з запитом (напр, мейл)
+    const foundUser = await User.findOne({
+      email,
+    });
+    if (!foundUser) {
+      //       - якщо такого юзера немає - відповідаємо помилкою (404/400)
+      throw new Error("User not found"); // ось тут може бути ваша помилка
+    }
+    //   3. Якщо такий юзер є - перевіряємо правильність пароля
+    // перевірити відповідність пароля можна за допомогою хешованої перевірки
+    const result = await bcrypt.compare(password, foundUser.passwordHash);
+    console.log(result); // result - true, якщо співпадають, false якщо ні
+    //       - якщо пароль не співпав - відповідаємо помилкою (400)
+    if (!result) {
+      throw new Error("Invalid data");
+    }
+    //   4. Якщо пароль співпав - створюємо сесію юзера і генеруємо для нього токен для всіх подальших запитів
+    const token = await createToken(foundUser.id, foundUser.email);
+    res.status(200).send({ data: deletePassword(foundUser), token });
     //      Всі наступні (подальші) запити мають приходити з цим виданим токеном
-  } catch(error) {
-      next(error);
+    // на клієнті цей токен зберігається у localStorage
+  } catch (error) {
+    next(error);
   }
-}
-
+};
 
 /*
  Аутентифікація - юзер приходить з логіном та паролем і ми перевіряємо, чи дійсно він зареєстрований, чи підходить пароль

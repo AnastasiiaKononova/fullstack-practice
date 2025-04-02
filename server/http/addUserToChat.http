@@ -1,0 +1,1 @@
+GET http://localhost:5000/api/chats/67ecf98931b89e41999abb2d/user/67ecffbae649d852a13ce8e9 HTTP/1.1
