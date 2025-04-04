@@ -21,3 +21,7 @@ Chat Task
  
  Task: розробити моделі для Mongoose
  Зробити контроллери на створення чату, відправку повідомлення в чат
+
+ -----  Front part 
+  - login/signUp page -> sign Up or sign In 
+  - messenger page  -> only for authorized users
