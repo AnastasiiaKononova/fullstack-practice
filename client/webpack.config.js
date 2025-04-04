@@ -8,6 +8,9 @@ module.exports = {
     filename: "my-webpack.bundle.js",
   },
   mode: "development",
+  devServer : {
+    static: path.resolve(__dirname, 'dist')
+  },
   module: {
     rules: [
       {
