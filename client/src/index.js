@@ -1,13 +1,11 @@
-console.log(React);
-console.log(ReactDOM);
-
-const Component = () => React.createElement('h1', {}, 'Hello, React');
-console.log(elem);
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Component from './Component/index';
 
 const rootElement = document.querySelector('#root');
 const root = ReactDOM.createRoot(rootElement);
 
-root.render(React.createElement(Component));
+root.render(<Component />);
 
 
 /*
