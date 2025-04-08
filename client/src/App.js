@@ -1,19 +1,24 @@
 import React, {useState} from 'react';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router, Switch, Route} from 'react-router-dom';
+import history from './history';
 
 function App() {
   const [user, setUser] = useState(null);
 
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
     <Switch>
-      <Route path='/' exact component={Home} />
-      <Route path='/messenger' component={Dashboard} />
+      <Route path='/' exact>
+        <Home setUser={setUser} />
+        </Route>
+      <Route path='/messenger'>
+        <Dashboard />
+        </Route>
     </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }
 
