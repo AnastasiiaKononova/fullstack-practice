@@ -25,3 +25,7 @@ Chat Task
  -----  Front part 
   - login/signUp page -> sign Up or sign In 
   - messenger page  -> only for authorized users
+
+  TODO:
+ - errorHandler (server part)
+ - refreshToken to DB (server part)

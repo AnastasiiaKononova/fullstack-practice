@@ -15,6 +15,8 @@ const Home = (props) => {
   const sendData = (data) => {
     console.log(data);
     props.setUser(data);
+    localStorage.setItem('accessToken', data.tokens.accessToken);
+    localStorage.setItem('refreshToken', data.tokens.refreshToken);
      // після оновлення даних у стейті App - хочемо автоматично перенаправити користувача на дашборд
     history.push('/messenger')
   };
