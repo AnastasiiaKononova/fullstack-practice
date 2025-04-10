@@ -1,0 +1,19 @@
+.container {
+    width: 100%;
+    height: 20vh;
+    background-color: ivory;
+    border: 1px solid lightgray;
+    display: flex;
+    flex-direction: row;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+}
+
+.textarea {
+    width: 95%;
+    height: 19vh;
+}

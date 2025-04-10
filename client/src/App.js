@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import {Router, Switch, Route} from 'react-router-dom';
 import history from './history';
+import './reset.css';
 
 function App() {
   const [user, setUser] = useState(null);
