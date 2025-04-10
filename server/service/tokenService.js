@@ -50,7 +50,7 @@ module.exports.createTokenPair = async (payload) => {
 const verifyToken = (token, { secret }) => promisifyJWTVerify(token, secret);
 
 module.exports.verifyAccessToken = async (token) =>
-  verifyToken(token, tokenConfig.access);
+  await verifyToken(token, tokenConfig.access);
 
 // результатом роботи буде або готовий розшифрований payload (якщо все окей, токен валідний і не прострочений) або помилка:
 
@@ -58,8 +58,17 @@ module.exports.verifyAccessToken = async (token) =>
 // TokenExpiredError - якщо токен правильний, але прострочився
 // JsonWebTokenError - якщо він коцнутий
 
-module.exports.verifyRefreshToken = async (token) =>  verifyToken(token, tokenConfig.refresh); 
+module.exports.verifyRefreshToken = async (token) =>
+  await verifyToken(token, tokenConfig.refresh);
 
+// async function test () {
+//     const rt = await createToken({userId: 'USER', email: 'MAIL'}, tokenConfig.refresh);
+//     console.log(rt);
+//     const res = await verifyToken(rt, tokenConfig.refresh);
+//     console.log(res);
+// }
+
+// test();
 
 /*
  

@@ -1,5 +1,5 @@
 const { verifyAccessToken } = require("../service/tokenService");
-const TokenError = require("../errors/TokenError");
+const AuthError = require("../errors/AuthError");
 
 module.exports.checkToken = async (req, res, next) => {
   try {
@@ -7,10 +7,11 @@ module.exports.checkToken = async (req, res, next) => {
       headers: { authorization },
     } = req;
     if (!authorization) {
-      throw new TokenError("Need authorization");
+      throw new AuthError("Need authorization"); // должны выдать 401 ошибку 
     }
     const [, token] = authorization.split(" ");
     req.payload = await verifyAccessToken(token);
+    // отвечаем 403 ошибкой - необходим рефреш сессии
     next();
   } catch (error) {
     next(error);
