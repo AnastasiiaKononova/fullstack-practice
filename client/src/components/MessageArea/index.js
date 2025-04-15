@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './MessageArea.module.css';
 
+
+// зчитувати нове повідомлення і відправляти його ДашБорду, а той - відправляти на сервер
 const MessageArea = () => {
     return (
         <form className={styles.container}>

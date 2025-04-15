@@ -84,34 +84,4 @@ export const logOut = async () => {
 
 export const getUserChats = async () => await httpClient.get("/chats");
 
-/*
-GET http://localhost:5000/api/chats HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWU1OTVhNGI2ZTIwZjBiYTMyMzY5MWMiLCJlbWFpbCI6ImphbmVEZWVlb2VAcmUuZmQiLCJpYXQiOjE3MDk2MzAzMTYsImV4cCI6MTcwOTYzMDY3Nn0.xmK-wWAcbAjZ4_Q0iJcK6JovZCH2b2_h_IMK4VKB6mU
 
-*/
-
-// const API_BASE = 'http://localhost:5000/api';
-
-// export const signIn = async (data) => {
-//     const options = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(data)
-//     }
-//     const res =  await fetch(`${API_BASE}/users/sign-in`, options);
-//     return await res.json();
-// }
-
-// export const signUp = async (data) => {
-//     const options = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     }
-//     const res = await fetch(`${API_BASE}/users/sign-up`, options)
-//     return await res.json();
-// }

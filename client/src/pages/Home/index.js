@@ -12,12 +12,12 @@ const Home = (props) => {
     setView(!formView);
   };
 
-  const sendData = (data) => {
-    console.log(data);
-    props.setUser(data);
-    
-     // після оновлення даних у стейті App - хочемо автоматично перенаправити користувача на дашборд
-    history.push('/messenger')
+  const sendData = (response) => {
+    console.log(response);
+    props.setUser(response.data.data);
+
+    // після оновлення даних у стейті App - хочемо автоматично перенаправити користувача на дашборд
+    history.push("/messenger");
   };
 
   const btnText = formView ? "Sign Up" : "Sign In";
