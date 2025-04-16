@@ -1,1 +1,2 @@
-GET http://localhost:5000/api/chats/67ecf98931b89e41999abb2d/user/67ecffbae649d852a13ce8e9 HTTP/1.1
+GET http://localhost:5000/api/chats/67ecf98931b89e41999abb2d/user/67ebe70796e3a28858be4ad9 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ViZTc3YjUwMmI0NjJjNjU0ZDQ5MWIiLCJlbWFpbCI6ImhpbEByZS5mZCIsImlhdCI6MTc0NDgwNzA0NSwiZXhwIjoxNzQ0ODI4NjQ1fQ.hGmjsWmxUAPo5QwN6Gw6j9wf947t3gjOe-tJtXyekRg
