@@ -1,24 +1,23 @@
-import React, {useState} from 'react';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import {Router, Switch, Route} from 'react-router-dom';
-import history from './history';
-import './reset.css';
+import React, { useState } from "react";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import {
+  unstable_HistoryRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import history from "./history";
+import "./reset.css";
 
 function App() {
   const [user, setUser] = useState(null);
 
-
   return (
     <Router history={history}>
-    <Switch>
-      <Route path='/' exact>
-        <Home setUser={setUser} />
-        </Route>
-      <Route path='/messenger'>
-        <Dashboard />
-        </Route>
-    </Switch>
+      <Routes>
+        <Route path="/" exact element={<Home setUser={setUser} />} />
+        <Route path="/messenger" element={<Dashboard />} />
+      </Routes>
     </Router>
   );
 }

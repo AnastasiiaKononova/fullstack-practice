@@ -1,5 +1,5 @@
 import axios from "axios";
-import history from "../history";
+// import history from "../history";
 
 const httpClient = axios.create({
   baseURL: "http://localhost:5000/api",
@@ -55,7 +55,7 @@ httpClient.interceptors.response.use(
     } else if (error.response.status === 401) {
       logOut();
       /// перекидаємо юзера на сторінку авторизації
-      history.replace("/");
+      // history.replace("/");
     }
   }
 );
@@ -84,4 +84,5 @@ export const logOut = async () => {
 
 export const getUserChats = async () => await httpClient.get("/chats");
 
-
+export const getOneChat = async (chatId) =>
+  await httpClient.get(`/chats/${chatId}`);

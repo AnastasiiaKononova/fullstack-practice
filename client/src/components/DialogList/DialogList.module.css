@@ -1,30 +1,38 @@
 .list {
-    width: 19vw;
-    height: 100%;
-    background-color: bisque;
-    border: 2px solid grey;
-    box-sizing: border-box;
+  width: 19vw;
+  height: 100%;
+  background-color: bisque;
+  border: 2px solid grey;
+  box-sizing: border-box;
 }
 
 .list-header {
-    width: 100%;
-    background-color: beige;
-    font-size: 1.5em;
-    display: flex;
-    justify-content: center;
-    padding: 0 2%;
-    box-sizing: border-box;
-    align-items: center;
+  width: 100%;
+  background-color: beige;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  padding: 0 2%;
+  box-sizing: border-box;
+  align-items: center;
 }
 
 .list-item img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .list-item:hover {
-    background-color: coral;
-    cursor: pointer;
+  background-color: coral;
+  cursor: pointer;
+}
+
+/* .chat-item {
+     background-color: honeydew;
+ } */
+
+.current-chat-item {
+  background-color: floralwhite;
 }

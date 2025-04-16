@@ -13,6 +13,7 @@ const DialogList = () => {
       setList(res.data.data);
     });
   }, []);
+
   return (
     <section className={styles.list}>
       <header className={styles["list-header"]}>Chat List</header>
