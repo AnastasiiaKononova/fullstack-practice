@@ -6,32 +6,34 @@ import UserContext from './contexts/UserContext';
 import history from './history';
 import './reset.css';
 import { getUserData } from './api';
+import MyComponent from './MyComponent';
 
 function App() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (!user) {
-      // ідемо за юзером.
-      // якщо отримуємо її - кладемо у стейт    
-      console.log('getUserData')
-      getUserData().then(({data: {data}}) => {
-        setUser(data)
-      })
-    }   
-  }, []);
+  //   if (!user) {
+  //     // ідемо за юзером.
+  //     // якщо отримуємо її - кладемо у стейт    
+  //     console.log('getUserData')
+  //     getUserData().then(({data: {data}}) => {
+  //       setUser(data)
+  //     })
+  //   }   
+  // }, []);
 
 
   return (
-    <Router history={history}>
-      <UserContext.Provider value={user}>
-      <Routes>
-        <Route path='/' exact element={<Home setUser={setUser}/>} />
-        <Route path='/messenger' element={<Dashboard />} />
-      </Routes>
-      </UserContext.Provider>
-    </Router>
+    <MyComponent />
+    // <Router history={history}>
+    //   <UserContext.Provider value={user}>
+    //   <Routes>
+    //     <Route path='/' exact element={<Home setUser={setUser}/>} />
+    //     <Route path='/messenger' element={<Dashboard />} />
+    //   </Routes>
+    //   </UserContext.Provider>
+    // </Router>
   );
 }
 
