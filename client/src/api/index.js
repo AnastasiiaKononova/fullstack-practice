@@ -87,7 +87,9 @@ export const getUserChats = async () => await httpClient.get("/chats");
 export const getOneChat = async (chatId) =>
   await httpClient.get(`/chats/${chatId}`);
 
+export const addNewMessage = async ({ chatId, message }) =>
+  await httpClient.post(`/chats/${chatId}`, message);
 
 /* User API */
 
-export const getUserData = async () => await httpClient.get('/users/');
+export const getUserData = async () => await httpClient.get("/users/");
