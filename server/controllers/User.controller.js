@@ -195,3 +195,16 @@ module.exports.refreshSession = async (req, res, next) => {
 - якщо так - оновлюємо сесію, видаємо нову пару токенів
 - якщо ні - видаємо іншу помилку, 400, і змушуємо користувача логінитись заново
 */
+
+module.exports.getUserData = async (req, res, next) => {
+  try {
+      const {payload: {userId}} = req;
+      const foundUser = await User.findById(userId);
+      if (!foundUser) {
+          throw new Error('User not found'); // статус 404
+      }
+      res.status(200).send({data: foundUser})
+  } catch(error) {
+      next(error);
+  }
+}

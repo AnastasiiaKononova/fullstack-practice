@@ -86,3 +86,8 @@ export const getUserChats = async () => await httpClient.get("/chats");
 
 export const getOneChat = async (chatId) =>
   await httpClient.get(`/chats/${chatId}`);
+
+
+/* User API */
+
+export const getUserData = async () => await httpClient.get('/users/');
