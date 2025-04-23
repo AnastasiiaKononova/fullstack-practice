@@ -1,63 +1,64 @@
-import React, {useState, useReducer} from 'react';
-import {connect} from 'react-redux';
+import React, { useState, useReducer } from "react";
+import { connect } from "react-redux";
 
 const ACTION_TYPES = {
-    INCREMENT: 'INCREMENT',
-    DECREMENT: 'DECREMENT',
-    STEP_CHANGE: 'STEP_CHANGE'
-}
+  INCREMENT: "INCREMENT",
+  DECREMENT: "DECREMENT",
+  STEP_CHANGE: "STEP_CHANGE",
+};
 
 const incrementActionCreator = () => ({
-        type: ACTION_TYPES.INCREMENT
-    })
+  type: ACTION_TYPES.INCREMENT,
+});
 
 const decrementActionCreator = () => ({
-        type: ACTION_TYPES.DECREMENT
-    })
+  type: ACTION_TYPES.DECREMENT,
+});
+
+const stepActionCreator = ({ target: { value } }) => ({
+  type: ACTION_TYPES.STEP_CHANGE,
+  value,
+});
 
 const MyComponent = (props) => {
+  console.log(props);
 
-    console.log(props);
-     
-    return (
-       
-        <div>
-            <h1>{props.count}</h1>
-            {/* <input name="step" value={state.step} onChange={changeHandler} /> */}
-            <button onClick={props.plus}>+</button>
-            <button onClick={props.minus}>-</button>
-        </div>
-    );
-}
+  return (
+    <div>
+      <h1>{props.count}</h1>
+      <input name="step" value={props.step} onChange={props.changeHandler} />
+      <button onClick={props.plus}>+</button>
+      <button onClick={props.minus}>-</button>
+    </div>
+  );
+};
 
 //export default MyComponent;
 
-
-const mapStateToProps = ({count, step}) => {
-    // функція, яка приймає весь об'єкт стору і повертає тільки ту частину, яка потрібна поточній компоненті
-    // повернена частина стору вкладається компоненті у пропси!
-    return {count, step}
-}
+const mapStateToProps = ({ count, step }) => {
+  // функція, яка приймає весь об'єкт стору і повертає тільки ту частину, яка потрібна поточній компоненті
+  // повернена частина стору вкладається компоненті у пропси!
+  return { count, step };
+};
 
 // const mapDispatchToProps = (dispatch) => {    // 1 спосіб - функція, яка повертає об'єкт
- //    return {
- //     plus: () => dispatch({type: ACTION_TYPES.INCREMENT}),
- //     minus: () => dispatch(decrementActionCreator())
- //    }
- // }
- 
- const mapDispatchToProps = {   // 2 спосіб - об'єкт
-    plus: incrementActionCreator,
-    minus: decrementActionCreator
-}
+//    return {
+//     plus: () => dispatch({type: ACTION_TYPES.INCREMENT}),
+//     minus: () => dispatch(decrementActionCreator())
+//    }
+// }
+
+const mapDispatchToProps = {
+  // 2 спосіб - об'єкт
+  plus: incrementActionCreator,
+  minus: decrementActionCreator,
+  changeHandler: stepActionCreator
+};
 
 // const HOC = connect(mapStateToProps);
 // const wrappedComponent = HOC(MyComponent);
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
-
-
 
 /*
  Керування станом:
@@ -68,9 +69,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
  
  */
 
-
-
- /*
+/*
  REDUX
  
  Передбачуваний контейнер для стану
@@ -81,8 +80,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
  
  
  */
- 
- /*
+
+/*
  
  Redux --- store
  
