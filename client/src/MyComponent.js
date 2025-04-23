@@ -7,44 +7,25 @@ const ACTION_TYPES = {
     STEP_CHANGE: 'STEP_CHANGE'
 }
 
+const incrementActionCreator = () => ({
+        type: ACTION_TYPES.INCREMENT
+    })
+
+const decrementActionCreator = () => ({
+        type: ACTION_TYPES.DECREMENT
+    })
+
 const MyComponent = (props) => {
 
     console.log(props);
-    
-    // const [state, dispatch] = useReducer(reducer, {
-    //                                     count: 0,
-    //                                     step: 0
-    //                                         });
-    
-    const increment = () => {
-        // setCount(count + step)
-        props.dispatch({
-            type: ACTION_TYPES.INCREMENT
-        })
-    }
-
-    const decrement = () => {
-        // setCount(count - step)
-        props.dispatch({
-            type: ACTION_TYPES.DECREMENT
-        })
-    }
-
-    const changeHandler = ({target: {value}}) => {
-        // setStep(Number(value));
-    //     props.dispatch({
-    //         type: ACTION_TYPES.STEP_CHANGE,
-    //         value
-    //     })
-     }
-    
+     
     return (
        
         <div>
             <h1>{props.count}</h1>
             {/* <input name="step" value={state.step} onChange={changeHandler} /> */}
-            <button onClick={increment}>+</button>
-            <button onClick={decrement}>-</button>
+            <button onClick={props.plus}>+</button>
+            <button onClick={props.minus}>-</button>
         </div>
     );
 }
@@ -58,11 +39,23 @@ const mapStateToProps = ({count, step}) => {
     return {count, step}
 }
 
+// const mapDispatchToProps = (dispatch) => {    // 1 спосіб - функція, яка повертає об'єкт
+ //    return {
+ //     plus: () => dispatch({type: ACTION_TYPES.INCREMENT}),
+ //     minus: () => dispatch(decrementActionCreator())
+ //    }
+ // }
+ 
+ const mapDispatchToProps = {   // 2 спосіб - об'єкт
+    plus: incrementActionCreator,
+    minus: decrementActionCreator
+}
+
 // const HOC = connect(mapStateToProps);
 // const wrappedComponent = HOC(MyComponent);
 
 
-export default connect(mapStateToProps)(MyComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
 
 
 
