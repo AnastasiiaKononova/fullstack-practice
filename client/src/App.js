@@ -6,40 +6,54 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-// import UserContext from "./contexts/UserContext";
+// import UserContext from './contexts/UserContext';
 import history from "./history";
 import "./reset.css";
+import { connect } from "react-redux";
 import { getUserData } from "./api";
 
-function App() {
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-
-  //   if (!user) {
-  //     // ідемо за юзером.
-  //     // якщо отримуємо її - кладемо у стейт
-  //     console.log('getUserData')
-  //     getUserData().then(({data: {data}}) => {
-  //       setUser(data)
-  //     })
-  //   }
-  // }, []);
+function App(props) {
+  useEffect(() => {
+    if (!props.user && localStorage.getItem("accessToken")) {
+      // ідемо за юзером.
+      // якщо отримуємо її - кладемо у стейт
+      console.log("getUserData");
+      getUserData()
+        .then(({ data: { data } }) => {
+          // у нас є в пропсах функція dispatch
+          console.log(data);
+          const action = {
+            type: "GET_USER_DATA",
+            payload: data,
+          };
+          props.dispatch(action);
+        })
+        .catch((error) => {
+          const action = {
+            type: "USER_DATA_ERROR_FETCHING",
+            error,
+          };
+          props.dispatch(action);
+        });
+    }
+  }, []);
 
   return (
-    <Router history={history}>
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        {/* <Route path="/messenger" element={<Dashboard />} /> */}
-      </Routes>
-    </Router>
+    <>
+      <Router history={history}>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          {/* <Route path='/messenger' element={<Dashboard />} /> */}
+        </Routes>
+      </Router>
+      {props.error && <p>Ooops, something goes wrong</p>}
+    </>
   );
 }
 
-export default App;
+const mapStateToProps = ({ user, error }) => ({ user, error });
+// визначає, яка частина стора нам потрібна тут!
 
-/*
-Розробити метод контроллера, роут на отримання інформації юзера на основі його токена
-Компонента App робить запит, якщо в стейті нема юзера, якщо запит провалився - нас має викинути на сторінку авторизації
+export default connect(mapStateToProps)(App);
 
-*/
+/// NEED refactor: чому ми провалились в безкінечний цикл?
