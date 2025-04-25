@@ -10,7 +10,7 @@ import ChatContext from "../../contexts/ChatContext";
 import UserContext from "../../contexts/UserContext";
 import { addNewMessage } from "../../actions/actionCreators";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   // const [currentChat, setCurrentChat] = useState();
   // const user = useContext(UserContext);
 
@@ -36,15 +36,13 @@ const Dashboard = () => {
   };
 
   return (
-    <ChatContext.Provider value={[currentChat, setCurrentChat]}>
-      <main className={styles["messenger-wrapper"]}>
-        <DialogList />
-        <section className={styles.container}>
-          <Chat />
-          <MessageArea sendData={sendNewMessage} />
-        </section>
-      </main>
-    </ChatContext.Provider>
+    <main className={styles["messenger-wrapper"]}>
+      <DialogList />
+      <section className={styles.container}>
+        <Chat />
+        <MessageArea sendData={sendNewMessage} />
+      </section>
+    </main>
   );
 };
 
