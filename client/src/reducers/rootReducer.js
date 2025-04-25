@@ -1,6 +1,9 @@
+import ACTION_TYPES from "../actions/actionTypes";
+import {produce} from 'immer';
+
 const initialStates = {
   user: null,
-  currentChat: null,
+  currentChat: [],
   error: null,
 };
 
@@ -19,6 +22,21 @@ function reducer(state = initialStates, action) {
         ...state,
         error: action.error.message,
       };
+    }
+    case ACTION_TYPES.ADD_NEW_MESSAGE: {
+      const nextState = produce(state, (draft) => {
+        draft.currentChat.push(action.payload);
+      });
+      return nextState;
+      
+      // return {
+      //   ...state,
+      //   currentChat: {
+      //     ...state.currentChat,
+      //     messages: [...state.currentChat.messages, action.payload]
+        
+      //   }
+      // }
     }
     default:
       return state; 
