@@ -5,6 +5,7 @@ const initialStates = {
   user: null,
   currentChat: [],
   error: null,
+  chatList: []
 };
 
 function reducer(state = initialStates, action) {

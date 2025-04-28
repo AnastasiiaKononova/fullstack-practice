@@ -44,3 +44,13 @@ export default connect(mapStateToProps)(Chat);
  Компонента Chat отримує з загального стору currentChat і 
  рендерить з нього список повідомлень
  */
+
+
+ /*
+ 
+ const HOC = connect(mapStateToProps, mapDispatchToProps)
+ High Order Component - функція, яка приймає Компоненту і повертає цю компоненту, "огорнуту" певними даними.
+ Дані передаються Компоненті у пропси.
+ 
+ mapStateToProps - це функція, яка приймає весь state зі store і повертає конкретну його частину, яка потрібна в цій компоненті
+ */
