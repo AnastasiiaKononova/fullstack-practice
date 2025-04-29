@@ -19,10 +19,20 @@ export const getUserDataError = (error) => ({
 
 
 /* Chat actions */
-export const addNewMessage = (payload) => ({
-  type: ACTION_TYPES.ADD_NEW_MESSAGE,
-  payload,
-});
+export const addNewMessageRequest = (payload) => ({
+  type: ACTION_TYPES.ADD_NEW_MESSAGE_REQUEST,
+  payload
+})
+
+export const addNewMessageSuccess = (payload) => ({
+  type: ACTION_TYPES.ADD_NEW_MESSAGE_SUCCESS,
+  payload
+})
+
+export const addNewMessageError = (error) => ({
+  type: ACTION_TYPES.ADD_NEW_MESSAGE_ERROR,
+  error
+})
 
 export const getUserChatList = () => ({
   type: ACTION_TYPES.GET_USER_CHATS_LIST_REQUEST
