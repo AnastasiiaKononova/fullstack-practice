@@ -37,3 +37,18 @@ export const getUserChatListError = (error) => ({
   type: ACTION_TYPES.GET_USER_CHATS_LIST_ERROR,
   error
 });
+
+export const getgetCurrentChatRequest = (payload) => ({
+  type: ACTION_TYPES.GET_CURRENT_CHAT_REQUEST,
+  payload
+});
+
+export const getCurrentChatSuccess = (payload) => ({
+  type: ACTION_TYPES.GET_CURRENT_CHAT_SUCCESS,
+  payload
+});
+
+export const getCurrentChatError = (error) => ({
+  type: ACTION_TYPES.GET_CURRENT_CHAT_ERROR,
+  error
+})
