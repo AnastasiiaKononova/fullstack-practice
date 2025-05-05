@@ -1,9 +1,10 @@
 import React from "react";
 import { Field, Form, useFormik } from "formik";
+import { connect } from "react-redux";
 import CustomField from "../CustomField/index";
 import styles from "../../pages/Home/Home.module.css";
-import { signIn } from "../../api/index";
-
+import {signInRequest} from '../../actions/actionCreators';
+// import {signIn} from '../../api/index';
 const SignInForm = (props) => {
   const formik = useFormik({
     initialValues: {
@@ -11,9 +12,11 @@ const SignInForm = (props) => {
       password: "",
     },
     onSubmit: (values) => {
-      signIn(values).then((res) => {
-        props.sendCallback(res);
-      });
+      // signIn(values).then((res) => {
+      //   props.sendCallback(res);
+      // });
+      // ТЕПЕР НАМ ТРЕБА ТІЛЬКИ ВІДПРАВИТИ ЕКШН
+      props.signInRequest(values);
     },
   });
 
@@ -40,4 +43,8 @@ const SignInForm = (props) => {
   );
 };
 
-export default SignInForm;
+const mapDispatch = {
+  signInRequest
+}
+
+export default connect(null, mapDispatch)(SignInForm);

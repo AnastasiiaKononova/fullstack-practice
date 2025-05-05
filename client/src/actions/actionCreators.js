@@ -17,6 +17,35 @@ export const getUserDataError = (error) => ({
   error
 })
 
+export const signInRequest = (payload) => ({
+  type: ACTION_TYPES.SIGN_IN_REQUEST,
+  payload
+})
+
+export const signInSuccess = (payload) => ({
+  type: ACTION_TYPES.SIGN_IN_SUCCESS,
+  payload
+})
+
+export const signInError = (error) => ({
+  type: ACTION_TYPES.SIGN_IN_ERROR,
+  error
+})
+
+export const signUpRequest = (payload) => ({
+  type: ACTION_TYPES.SIGN_UP_REQUEST,
+  payload
+})
+
+export const signUpSuccess = (payload) => ({
+  type: ACTION_TYPES.SIGN_UP_SUCCESS,
+  payload
+})
+
+export const signUpError = (error) => ({
+  type: ACTION_TYPES.SIGN_UP_ERROR
+})
+
 
 /* Chat actions */
 export const addNewMessageRequest = (payload) => ({

@@ -1,9 +1,11 @@
 import React from "react";
 import { Field, Form, useFormik } from "formik";
 import { format } from "date-fns";
+import { connect } from "react-redux";
 import CustomField from "../CustomField";
 import styles from "../../pages/Home/Home.module.css";
-import {signUp} from '../../api/index';
+// import {signUp} from '../../api/index';
+import {signUpRequest} from '../../actions/actionCreators';
 
 const SignUpForm = (props) => {
   const formik = useFormik({
@@ -16,9 +18,10 @@ const SignUpForm = (props) => {
       imagePath: "",
     },
     onSubmit: (values) => {
-      signUp(values).then((res) => {
-        props.sendCallback(res);
-      });
+      // signUp(values).then((res) => {
+      //   props.sendCallback(res);
+      // });
+      props.signUpRequest(values)
     },
   });
   return (
@@ -58,7 +61,11 @@ const SignUpForm = (props) => {
   );
 };
 
-export default SignUpForm;
+const mapDispatch = {
+  signUpRequest
+}
+
+export default connect(null, mapDispatch)(SignUpForm);
 
 /*
  

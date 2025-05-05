@@ -37,7 +37,8 @@ function reducer(state = initialStates, action) {
         chatList: action.payload,
       };
     }
-
+    case ACTION_TYPES.SIGN_IN_ERROR:
+    case ACTION_TYPES.SIGN_UP_ERROR:
     case ACTION_TYPES.ADD_NEW_MESSAGE_ERROR:
     case ACTION_TYPES.GET_USER_DATA_ERROR:
     case ACTION_TYPES.GET_USER_CHATS_LIST_ERROR: {
@@ -61,6 +62,13 @@ function reducer(state = initialStates, action) {
         isFetching: false,
         user: action.payload,
       };
+    }
+    case ACTION_TYPES.SIGN_UP_SUCCESS:
+    case ACTION_TYPES.SIGN_IN_SUCCESS: {
+      return{
+        ...state,
+        user: action.payload
+      }
     }
     default:
       return state;

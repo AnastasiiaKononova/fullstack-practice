@@ -12,13 +12,13 @@ const Home = (props) => {
     setView(!formView);
   };
 
-  const sendData = (response) => {
-    console.log(response);
-    props.setUser(response.data.data);
+  // const sendData = (response) => {
+  //   console.log(response);
+  //   props.setUser(response.data.data);
 
-    // після оновлення даних у стейті App - хочемо автоматично перенаправити користувача на дашборд
-    history.push("/messenger");
-  };
+  //   // після оновлення даних у стейті App - хочемо автоматично перенаправити користувача на дашборд
+  //   history.push("/messenger");
+  // };
 
   const btnText = formView ? "Sign Up" : "Sign In";
 
@@ -27,9 +27,9 @@ const Home = (props) => {
       <button onClick={changeView}>{btnText}</button>
       <section className={styles["form-container"]}>
         {formView ? (
-          <SignInForm sendCallback={sendData} />
+          <SignInForm />
         ) : (
-          <SignUpForm sendCallback={sendData} />
+          <SignUpForm />
         )}
       </section>
     </main>
