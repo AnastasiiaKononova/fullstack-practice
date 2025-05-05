@@ -14,7 +14,6 @@ function reducer(state = initialStates, action) {
   console.log(action);
 
   switch (action.type) {
-    
     case ACTION_TYPES.ADD_NEW_MESSAGE_SUCCESS: {
       const nextState = produce(state, (draft) => {
         draft.currentChat.messages.push(action.payload);
@@ -65,20 +64,42 @@ function reducer(state = initialStates, action) {
     }
     case ACTION_TYPES.SIGN_UP_SUCCESS:
     case ACTION_TYPES.SIGN_IN_SUCCESS: {
-      return{
+      return {
         ...state,
-        user: action.payload
-      }
+        user: action.payload,
+      };
     }
     case ACTION_TYPES.GET_CURRENT_CHAT_SUCCESS: {
-      return{
+      const currentChat = action.payload;
+      const userMap = new Map();
+      currentChat.members.forEach((user) => {
+        userMap.set(user._id, user);
+      });
+
+      const mapped = currentChat.messages.map((message) => {
+        message.author = userMap.get(message.author);
+        return message;
+      });
+      return {
         ...state,
-        currentChat: action.payload
-      }
-       /// Ось тут в редьюсері ми можемо робити будь-які СИНХРОННІ перетворення даних
+        currentChat: {
+          ...currentChat,
+          messages: mapped,
+        },
+      };
+      /// Ось тут в редьюсері ми можемо робити будь-які СИНХРОННІ перетворення даних
     }
     default:
       return state;
   }
 }
 export default reducer;
+
+/*
+ currentChat = {
+     members: [],
+     messages: []
+ }
+ Треба пройтись циклом по messages і в поле author "всадити" об'єкт members, який відповідає цьому автору
+ 
+   */
