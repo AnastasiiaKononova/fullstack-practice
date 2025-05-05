@@ -1,24 +1,27 @@
-import React, {useContext} from 'react';
- import cx from 'classnames';
- import styles from '../Chat.module.css';
- import UserContext from '../../../contexts/UserContext';
- 
- const ChatItem = (props) => {
-     const user = useContext(UserContext);
- 
-     const {author, body} = props.message;
-     const cn = cx(styles['message-container'], {
-         [styles['current-user-message']]: author === user?._id
-     })
-     return (
-         <div className={cn}>
-             <p className={styles['message-author']}>{author}</p>
-             <p>{body}</p>
-         </div>
-     );
- }
- 
- export default ChatItem;
+import React, { useContext } from "react";
+import { connect } from "react-redux";
+import cx from "classnames";
+import styles from "../Chat.module.css";
+//  import UserContext from '../../../contexts/UserContext';
+
+const ChatItem = (props) => {
+  //  const user = useContext(UserContext);
+
+  const { author, body } = props.message;
+  const cn = cx(styles["message-container"], {
+    [styles["current-user-message"]]: author === props.user?._id,
+  });
+  return (
+    <div className={cn}>
+      <p className={styles["message-author"]}>{author}</p>
+      <p>{body}</p>
+    </div>
+  );
+};
+
+const mapState = ({ user }) => ({ user });
+
+export default connect(mapState)(ChatItem);
 
 /*
   {

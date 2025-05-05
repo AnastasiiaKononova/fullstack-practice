@@ -5,10 +5,10 @@ import DialogList from "../../components/DialogList";
 import Chat from "../../components/Chat";
 import MessageArea from "../../components/MessageArea";
 import styles from "./Dashboard.module.css";
-import ChatContext from "../../contexts/ChatContext";
+// import ChatContext from "../../contexts/ChatContext";
 // import { addNewMessage } from "../../api/index";
-import UserContext from "../../contexts/UserContext";
-import { addNewMessage } from "../../actions/actionCreators";
+// import UserContext from "../../contexts/UserContext";
+import { addNewMessageRequest } from "../../actions/actionCreators";
 
 const Dashboard = (props) => {
   // const [currentChat, setCurrentChat] = useState();
@@ -21,8 +21,10 @@ const Dashboard = (props) => {
         author: props.user._id,
         body: text,
       },
-    };
-    props.addMessage(apiObj);
+    }
+    props.addNewMessageRequest(apiObj)
+    
+    // props.addMessage(apiObj);
     // };
     // props.dispatch(addNewMessage(apiObj))
     // addNewMessage(apiObj)
@@ -57,7 +59,7 @@ const mapStateToProps = ({ user, currentChat }) => ({ user, currentChat });
 // }
 
 const mapDispatchToProps = {
-  addMessage: addNewMessage,
+  addNewMessageRequest
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

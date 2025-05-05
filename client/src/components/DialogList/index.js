@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styles from "./DialogList.module.css";
 import { getUserChats } from "../../api/index";
 import ListItem from "./ListItem";
-import { getUserChatsList } from "../../actions/actionCreators";
+import { getUserChatList } from "../../actions/actionCreators";
 
 // При відкритті компонента робить запит за списком діалогів юзера
 
@@ -17,8 +17,9 @@ const DialogList = (props) => {
   // }, []);
 
   useEffect(() => {
-    props.getUserChatsList();
-  }, []);
+    const result =  props.getUserChatList();
+    console.log(result);
+ }, [])
 
   const { chatList } = props;
 
@@ -34,7 +35,7 @@ const DialogList = (props) => {
 const mapStateToProps = ({ chatList }) => ({ chatList });
 
 const mapDispatchToProps = {
-  getUserChatsList,
+  getUserChatList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DialogList);
