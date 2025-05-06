@@ -28,11 +28,11 @@
 // Це функції, які здатні призупиняти свою роботу на певному місці,
 //повертати проміжний результат дії і очікувати на наступний виклик, відновлювати роботу з того самого місця і отримувати нові вхідні дані при цьому.
 
-function sum(a, b) {
-  // звичайна функція - вхідні параметри
-  const res = a + b; // виконання роботи
-  return res; // повернення результату
-}
+// function sum(a, b) {
+//   // звичайна функція - вхідні параметри
+//   const res = a + b; // виконання роботи
+//   return res; // повернення результату
+// }
 
 sum(2, 4); // виклик функції змушує код відпрацювати і повернути в це саме місце результат виконання функції
 
@@ -165,3 +165,34 @@ console.log(m4);
 const m5 = gener.next();
 console.log(m5);
 
+/////// Reducer to object
+ 
+ 
+const sum = (a, b) => a+b;
+ 
+const sub = (a, b) => a-b;
+
+const multy = (a, b) => a*b;
+
+const div = (a, b) => a/b;
+
+
+function calculator1(a, b, operator) {
+    // switch(operator) {
+    //     case 'sum': return sum(a,b);
+    //     case 'sub': return sub(a,b);
+    //     case 'multy': return multy;
+    //     case 'div': return div(a,b);
+    // }
+
+
+    calculator[operator](a,b);
+}
+
+
+const calculator = {
+    '+': sum,
+    '-': sub,
+    '*': multy,
+    '/': div
+}
