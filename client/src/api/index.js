@@ -1,5 +1,5 @@
 import axios from "axios";
-// import history from "../history";
+import history from "../history";
 
 const httpClient = axios.create({
   baseURL: "http://localhost:5000/api",
@@ -45,10 +45,10 @@ httpClient.interceptors.response.use(
     Якщо помилка з кодом 403 - токен коцнутий(або прострочився). Необхний рефреш сесії
     Якщо помилка з кодом 401 - аксессТокен відсутній або рефреш не вдався, необхідно перелогінити юзера
     */
-    if (error.response.status === 403) {
+    if (error.response.status === 403 && localStorage.getItem("refreshToken")) {
       // рефрешримо сесію
       // маємо зробити запит на /refresh з РТ, щоби оновити сесію, а після цього повторно зробити початковий запит за ресурсом, який хотів юзер
-      refreshSession().then(() => {
+      return refreshSession().then(() => {
         // коли запит на оновлення сесії успішно повернувся і поклав до LS свіжі токени - робимо заново той же самий запит
         return httpClient(error.config);
       });
@@ -56,6 +56,8 @@ httpClient.interceptors.response.use(
       logOut();
       /// перекидаємо юзера на сторінку авторизації
       // history.replace("/");
+    } else {
+      return Promise.reject(error);
     }
   }
 );
@@ -79,6 +81,7 @@ export const refreshSession = async () => {
 
 export const logOut = async () => {
   localStorage.clear();
+  history.replace("/");
 };
 
 /* Chat API */
