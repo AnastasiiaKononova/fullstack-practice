@@ -15,8 +15,14 @@ module.exports.addMessage = async (req, res, next) => {
     const {
       body,
       params: { chatId },
+      file,
     } = req;
-    const newMessageInstance = await Message.create({ ...body, chat: chatId });
+    const newMessageInstance = await Message.create({
+      ...body,
+      chat: chatId,
+      imagePath: file.filename,
+    });
+    console.log(newMessageInstance);
     const chatInstance = await Chat.findById(chatId);
     console.log(chatInstance);
     chatInstance.messages.push(newMessageInstance);
@@ -66,7 +72,9 @@ module.exports.getOneChat = async (req, res, next) => {
     const {
       params: { chatId },
     } = req;
-    const foundChat = await Chat.findById(chatId).populate('members').populate('messages');
+    const foundChat = await Chat.findById(chatId)
+      .populate("members")
+      .populate("messages");
     res.status(200).send({ data: foundChat });
   } catch (error) {
     next(error);
