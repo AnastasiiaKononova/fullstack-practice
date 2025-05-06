@@ -7,6 +7,7 @@ const httpClient = axios.create({
 
 httpClient.interceptors.request.use(
   (config) => {
+    // NEED REFACTOR: запит іде на автоматі з заголовком application/json, а на роут додавання нового повідомлення нам потрібно заголовок multipart/form-data
     const token = localStorage.getItem("accessToken");
     if (token) {
       // маємо додати до запиту заголовок Authorization з цим токеном

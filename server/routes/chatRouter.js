@@ -3,7 +3,7 @@ const ChatController = require("../controllers/Chat.controller");
 const { checkToken } = require("../middlewares/checkToken");
 const upload = require("../middlewares/multer");
 
-// chatRouter.use(checkToken);
+chatRouter.use(checkToken);
 
 chatRouter.get("/", ChatController.getAllUserChats);
 chatRouter.post("/", ChatController.createChat);

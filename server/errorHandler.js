@@ -8,6 +8,9 @@ module.exports.errorHandler = async (err, req, res, next) => {
   if (err instanceof TokenExpiredError || err instanceof JsonWebTokenError) {
     return res.status(403).send("Token is outdated");
   }
-
+  console.log(err);
+  /* 
+     NEED REFACTOR: створити кастомну помилку для випадків, коли за вказаним у токені userId неможливо знайти юзера або його чати
+   */
   return res.status(500).send(err.message);
 };
