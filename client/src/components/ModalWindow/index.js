@@ -10,3 +10,9 @@ const ModalWindow = () => {
 };
 
 export default ModalWindow;
+
+
+/*
+ModalWindow має містити форму для створення нового чату. Кнопку відправки, яка відправляє action, той через сагу відправляє запит на api
+
+*/
