@@ -1,6 +1,5 @@
 POST http://localhost:5000/api/chats/67ecf98931b89e41999abb2d HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ViZTc3YjUwMmI0NjJjNjU0ZDQ5MWIiLCJlbWFpbCI6ImhpbEByZS5mZCIsImlhdCI6MTc0NDgwNzA0NSwiZXhwIjoxNzQ0ODI4NjQ1fQ.hGmjsWmxUAPo5QwN6Gw6j9wf947t3gjOe-tJtXyekRg
+Content-Type: multipart/form-data
 
 {
     "author": "67ebe70796e3a28858be4ad9",

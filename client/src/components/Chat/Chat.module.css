@@ -32,3 +32,7 @@
 .current-user-message {
   align-self: flex-end;
 }
+
+.message-image {
+  width: 15vw;
+}

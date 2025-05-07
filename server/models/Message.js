@@ -6,8 +6,7 @@ const messageSchema = new Schema({
     ref: "User",
   },
   body: {
-    type: String,
-    required: true,
+    type: String
   },
   imagePath: {
     type: String,

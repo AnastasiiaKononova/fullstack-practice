@@ -55,6 +55,7 @@ export function* getOneChatSaga(action) {
 
  export function* addNewMessageSaga(action) {
   try{
+    console.log(action.payload);
     const {data: {data}} = yield addNewMessage(action.payload);
     yield put(addNewMessageSuccess(data));
   }catch(error) {
