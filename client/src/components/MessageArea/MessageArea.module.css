@@ -7,6 +7,15 @@
   flex-direction: row;
 }
 
+.drag-active {
+  border: 4px dashed lightblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(182, 190, 201, 0.661);
+}
+
 .icon {
   width: 20px;
   height: 20px;
