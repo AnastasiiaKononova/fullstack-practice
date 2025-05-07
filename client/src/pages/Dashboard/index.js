@@ -6,6 +6,7 @@ import Chat from "../../components/Chat";
 import MessageArea from "../../components/MessageArea";
 import styles from "./Dashboard.module.css";
 import { addNewMessageRequest } from "../../actions/actionCreators";
+import ModalWindow from "../../components/ModalWindow";
 
 const Dashboard = (props) => {
   return (
@@ -15,6 +16,7 @@ const Dashboard = (props) => {
         <Chat />
         <MessageArea/>
       </section>
+      <ModalWindow />
     </main>
   );
 };

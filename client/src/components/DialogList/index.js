@@ -17,9 +17,9 @@ const DialogList = (props) => {
   // }, []);
 
   useEffect(() => {
-    const result =  props.getUserChatList();
+    const result = props.getUserChatList();
     console.log(result);
- }, [])
+  }, []);
 
   const { chatList } = props;
 
@@ -28,6 +28,7 @@ const DialogList = (props) => {
       <header className={styles["list-header"]}>Chat List</header>
       {chatList &&
         chatList.map((chat) => <ListItem chat={chat} key={chat._id} />)}
+      <footer>+ Add new chat</footer>
     </section>
   );
 };
@@ -35,7 +36,7 @@ const DialogList = (props) => {
 const mapStateToProps = ({ chatList }) => ({ chatList });
 
 const mapDispatchToProps = {
-  getUserChatList
+  getUserChatList,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DialogList);
