@@ -1,23 +1,26 @@
 import React, { useContext } from "react";
 import styles from "../DialogList.module.css";
-// import ChatContext from "../../../contexts/ChatContext";
-import {connect} from 'react-redux';
-import {getCurrentChatRequest} from '../../../actions/actionCreators';
+import { connect } from "react-redux";
+import { getCurrentChatRequest } from "../../../actions/actionCreators";
 import cx from "classnames";
+import "animate.css";
 
 const IMAGE_PLACEHOLDER = "/assets/icons/image-placeholder.avif";
 
 const ListItem = (props) => {
   // const [currentChat, setCurrentChat] = useContext(ChatContext);
-  const {chat: {members, messages, imagePath, name, _id}, currentChat} = props;
+  const {
+    chat: { members, messages, imagePath, name, _id },
+    currentChat,
+  } = props;
 
-  const cn = cx(styles["list-item"], {
-    [styles["current-chat-item"]]: currentChat?._id === _id,
-  });
+  const cn = cx(styles['list-item'], {
+    [styles['current-chat-item']]: currentChat?._id === _id
+},'animate__animated', 'animate__slideInRight');
 
   const clickHandler = () => {
     // setCurrentChat(props.chat);
-    props.getCurrentChatRequest(_id)
+    props.getCurrentChatRequest(_id);
   };
   return (
     <article className={cn} onClick={clickHandler}>
@@ -27,10 +30,10 @@ const ListItem = (props) => {
   );
 };
 
-const mapState = ({currentChat}) => ({currentChat})
+const mapState = ({ currentChat }) => ({ currentChat });
 
 const mapDispatch = {
-  getCurrentChatRequest
-}
+  getCurrentChatRequest,
+};
 
 export default connect(mapState, mapDispatch)(ListItem);

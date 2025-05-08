@@ -2,8 +2,11 @@ const { User, Chat, Message } = require("../models");
 
 module.exports.createChat = async (req, res, next) => {
   try {
-    const { body } = req;
-    const chat = await Chat.create(body);
+    const { body, payload: {userId} } = req;
+    const chat = await Chat.create({ ...body,members: [userId] });
+    // const userInstance = await User.findById(userId);
+    // chat.members.push(userInstance);
+    // await chat.save();
     res.status(201).send({ data: chat });
   } catch (error) {
     next(error);

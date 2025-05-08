@@ -4,18 +4,11 @@ import styles from "./DialogList.module.css";
 import { getUserChats } from "../../api/index";
 import ListItem from "./ListItem";
 import { getUserChatList } from "../../actions/actionCreators";
-
+import ModalWindow from "../ModalWindow";
 // При відкритті компонента робить запит за списком діалогів юзера
 
 const DialogList = (props) => {
-  // const [list, setList] = useState();
-
-  // useEffect(() => {
-  //   getUserChats().then((res) => {
-  //     setList(res.data.data);
-  //   });
-  // }, []);
-
+ 
   useEffect(() => {
     const result = props.getUserChatList();
     console.log(result);
@@ -28,7 +21,7 @@ const DialogList = (props) => {
       <header className={styles["list-header"]}>Chat List</header>
       {chatList &&
         chatList.map((chat) => <ListItem chat={chat} key={chat._id} />)}
-      <footer>+ Add new chat</footer>
+      <footer onClick={props.openModal} className = {styles.foot}>+ Add new chat</footer>
     </section>
   );
 };
