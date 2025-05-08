@@ -1,15 +1,20 @@
 import { put } from "redux-saga/effects";
-import { getUserChats, getOneChat, addNewMessage, createNewChat} from "../api/index";
 import {
-  getUserChatListSuccess,
+  getUserChats,
+  getOneChat,
+  addNewMessage,
+  createNewChat,
+} from "../api/index";
+import {
   getUserChatListError,
   getCurrentChatSuccess,
   getCurrentChatError,
   addNewMessageSuccess,
   addNewMessageError,
   createNewChatSuccess,
-  createNewChatError
+  createNewChatError,
 } from "../actions/actionCreators";
+import { getUserChatListSuccess } from "../reducers/chatListReducer";
 
 export function* getUserChatSaga() {
   try {
@@ -25,21 +30,20 @@ export function* getUserChatSaga() {
   }
 }
 
-
 export function* getOneChatSaga(action) {
   /// робимо запит на api і опрацювання результату
-     // action.payload має містити інфу про запитуваний чат
-     try {
-      const {data: {data}} = yield getOneChat(action.payload);
-      const successAction = getCurrentChatSuccess(data);
-      yield put(successAction);
-     }catch(error) {
-      const errAction = getCurrentChatError(error);
-      yield put(errAction);
-     }
+  // action.payload має містити інфу про запитуваний чат
+  try {
+    const {
+      data: { data },
+    } = yield getOneChat(action.payload);
+    const successAction = getCurrentChatSuccess(data);
+    yield put(successAction);
+  } catch (error) {
+    const errAction = getCurrentChatError(error);
+    yield put(errAction);
+  }
 }
-
-
 
 /*
  Декомпозиція втілення нового функціоналу з api-запитом:
@@ -52,24 +56,27 @@ export function* getOneChatSaga(action) {
  
  */
 
+/// Відправку нового повідомлення (addNewMessage)
 
- /// Відправку нового повідомлення (addNewMessage)
-
- export function* addNewMessageSaga(action) {
-  try{
-    console.log(action.payload);
-    const {data: {data}} = yield addNewMessage(action.payload);
-    yield put(addNewMessageSuccess(data));
-  }catch(error) {
-    yield put(addNewMessageError(error))
-  }
- }
-
- export function* createChatSaga(action) {
+export function* addNewMessageSaga(action) {
   try {
-      const {data: {data}} = yield createNewChat(action.payload);
-      yield put(createNewChatSuccess(data));
-  } catch(error) {
-      yield put(createNewChatError(error));
+    console.log(action.payload);
+    const {
+      data: { data },
+    } = yield addNewMessage(action.payload);
+    yield put(addNewMessageSuccess(data));
+  } catch (error) {
+    yield put(addNewMessageError(error));
+  }
+}
+
+export function* createChatSaga(action) {
+  try {
+    const {
+      data: { data },
+    } = yield createNewChat(action.payload);
+    yield put(createNewChatSuccess(data));
+  } catch (error) {
+    yield put(createNewChatError(error));
   }
 }
