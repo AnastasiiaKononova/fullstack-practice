@@ -1,20 +1,29 @@
 import ACTION_TYPES from "./actionTypes";
+import { createAction } from "@reduxjs/toolkit";
 
 /* Auth/UserData actions */
 
-export const getUserDataRequest = () => ({
-  type: ACTION_TYPES.GET_USER_DATA_REQUEST,
-});
+//// refactor to createAction
 
-export const getUserDataSuccess = (payload) => ({
-  type: ACTION_TYPES.GET_USER_DATA_SUCCESS,
-  payload,
-});
+// export const getUserDataRequest = () => ({
+//   type: ACTION_TYPES.GET_USER_DATA_REQUEST,
+// });
 
-export const getUserDataError = (error) => ({
-  type: ACTION_TYPES.GET_USER_DATA_ERROR,
-  error,
-});
+// export const getUserDataSuccess = (payload) => ({
+//   type: ACTION_TYPES.GET_USER_DATA_SUCCESS,
+//   payload,
+// });
+
+// export const getUserDataError = (error) => ({
+//   type: ACTION_TYPES.GET_USER_DATA_ERROR,
+//   error,
+// });
+
+export const getUserDataRequest = createAction('GET_USER_DATA_REQUEST');
+export const getUserDataSuccess = createAction(ACTION_TYPES.GET_USER_DATA_SUCCESS);
+export const getUserDataError = createAction(ACTION_TYPES.GET_USER_DATA_ERROR);
+
+
 
 export const signInRequest = (payload) => ({
   type: ACTION_TYPES.SIGN_IN_REQUEST,
@@ -104,3 +113,30 @@ export const createNewChatError = (error) => ({
   type: ACTION_TYPES.CREATE_NEW_CHAT_ERROR,
   error,
 });
+
+
+
+/*
+
+const actionType = 'ACTION_TYPE';
+
+const actionCreator = (payload) => ({
+    type: actionType,
+    payload
+});
+
+
+const action = createAction(actionType); // action - це функція, яка очікує на виклик з корисним навантаженням, аби повернути action-об'єкт з типом і payload
+action(payload);
+
+function customActionCreator (type) {
+    return function (payload) {
+        return {
+            type,
+            payload
+        }
+    }
+}
+
+*/
+

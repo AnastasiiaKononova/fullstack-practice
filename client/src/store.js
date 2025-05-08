@@ -1,14 +1,33 @@
 import { createStore, applyMiddleware} from "redux";
+import {configureStore, current} from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
-import reducer from "./reducers/rootReducer";
+import rootReducer from "./reducers/rootReducer";
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from "./sagas/rootSaga";
+import chatListReducer from "./reducers/chatListReducer";
+import currentChatReducer from "./reducers/currentChatReducer";
+import errorReducer from "./reducers/errorReducer";
+import fetchingReducer from "./reducers/fetchingReducer";
+import userReducer from "./reducers/userReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const enhancer = composeWithDevTools(applyMiddleware(sagaMiddleware));
+// const enhancer = composeWithDevTools(applyMiddleware(sagaMiddleware));
 
-const store = createStore(reducer, enhancer);
+// const store = createStore(reducer, enhancer);
+
+
+
+const store = configureStore({
+    reducer: {
+        user: userReducer,
+        chatList: chatListReducer,
+        currentChat: currentChatReducer,
+        error: errorReducer,
+        isFetching: fetchingReducer,
+    },
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware({thunk: false}), sagaMiddleware]
+});
 
 sagaMiddleware.run(rootSaga);
 
