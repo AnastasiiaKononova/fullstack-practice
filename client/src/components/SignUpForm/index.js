@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Field, Form, useFormik } from "formik";
 import { format } from "date-fns";
 import { connect } from "react-redux";
 import CustomField from "../CustomField";
 import styles from "../../pages/Home/Home.module.css";
-// import {signUp} from '../../api/index';
 import {signUpRequest} from '../../actions/actionCreators';
+// import {signUp} from '../../api/index';
 
 const SignUpForm = (props) => {
+  const [fileImage, setFile] = useState();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -15,15 +16,18 @@ const SignUpForm = (props) => {
       email: "",
       password: "",
       birthday: format(new Date(), "yyyy-MM-dd"),
-      imagePath: "",
     },
     onSubmit: (values) => {
       // signUp(values).then((res) => {
       //   props.sendCallback(res);
       // });
-      props.signUpRequest(values)
+      props.signUpRequest({...values, fileImage})
     },
   });
+
+  const imageHandler = ({target}) => {
+    setFile(target.files[0]);
+  }
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -55,7 +59,7 @@ const SignUpForm = (props) => {
         placeholder="Type your password"
       />
       <CustomField type="date" name="birthday" formik={formik} />
-      <CustomField type="file" name="imagePath" formik={formik} />
+      <input type="file" name="imagePath" files= {fileImage} onChange={imageHandler} />
       <button type="submit">Submit form</button>
     </form>
   );

@@ -35,8 +35,8 @@ rkjkj21k34kjh234kjk
 
 module.exports.signUp = async (req, res, next) => {
   try {
-    const { body } = req;
-    const createdUser = await User.create(body); // за потреби можемо вручну перераховувати поля, які передаємо в об'єкті на створення юзера
+    const { body, file } = req;
+    const createdUser = await User.create({...body, imagePath: file?.filename}); // за потреби можемо вручну перераховувати поля, які передаємо в об'єкті на створення юзера
     const readyUser = deletePassword(createdUser);
     // перед тим, як повертати юзера, треба з об'єкта видалити пароль
 

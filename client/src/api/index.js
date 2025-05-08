@@ -71,8 +71,11 @@ httpClient.interceptors.response.use(
 export const signIn = async (data) =>
   await httpClient.post("/users/sign-in", data);
 
-export const signUp = async (data) =>
-  await httpClient.post("/users/sign-up", data);
+export const signUp = async (data) => await httpClient.post('/users/sign-up', data, {
+  headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+});
 
 export const refreshSession = async () => {
   // беремо з localStorage refreshToken і надсилаємо його на /refresh
