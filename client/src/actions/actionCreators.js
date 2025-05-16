@@ -55,20 +55,26 @@ export const signUpError = (error) => ({
 });
 
 /* Chat actions */
-export const addNewMessageRequest = (payload) => ({
-  type: ACTION_TYPES.ADD_NEW_MESSAGE_REQUEST,
-  payload,
-});
+// export const addNewMessageRequest = (payload) => ({
+//   type: ACTION_TYPES.ADD_NEW_MESSAGE_REQUEST,
+//   payload,
+// });
 
-export const addNewMessageSuccess = (payload) => ({
-  type: ACTION_TYPES.ADD_NEW_MESSAGE_SUCCESS,
-  payload,
-});
+// export const addNewMessageSuccess = (payload) => ({
+//   type: ACTION_TYPES.ADD_NEW_MESSAGE_SUCCESS,
+//   payload,
+// });
 
-export const addNewMessageError = (error) => ({
-  type: ACTION_TYPES.ADD_NEW_MESSAGE_ERROR,
-  error,
-});
+// export const addNewMessageError = (error) => ({
+//   type: ACTION_TYPES.ADD_NEW_MESSAGE_ERROR,
+//   error,
+// });
+
+export const addNewMessageRequest = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_REQUEST);
+
+export const addNewMessageSuccess = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_SUCCESS);
+
+export const addNewMessageError = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_ERROR);
 
 export const getUserChatList = () => ({
   type: ACTION_TYPES.GET_USER_CHATS_LIST_REQUEST,
@@ -84,20 +90,26 @@ export const getUserChatListError = (error) => ({
   error,
 });
 
-export const getCurrentChatRequest = (payload) => ({
-  type: ACTION_TYPES.GET_CURRENT_CHAT_REQUEST,
-  payload,
-});
+// export const getCurrentChatRequest = (payload) => ({
+//   type: ACTION_TYPES.GET_CURRENT_CHAT_REQUEST,
+//   payload,
+// });
 
-export const getCurrentChatSuccess = (payload) => ({
-  type: ACTION_TYPES.GET_CURRENT_CHAT_SUCCESS,
-  payload,
-});
+// export const getCurrentChatSuccess = (payload) => ({
+//   type: ACTION_TYPES.GET_CURRENT_CHAT_SUCCESS,
+//   payload,
+// });
 
-export const getCurrentChatError = (error) => ({
-  type: ACTION_TYPES.GET_CURRENT_CHAT_ERROR,
-  error,
-});
+// export const getCurrentChatError = (error) => ({
+//   type: ACTION_TYPES.GET_CURRENT_CHAT_ERROR,
+//   error,
+// });
+
+export const getCurrentChatRequest = createAction(ACTION_TYPES.GET_CURRENT_CHAT_REQUEST);
+
+export const getCurrentChatSuccess = createAction(ACTION_TYPES.GET_CURRENT_CHAT_SUCCESS);
+
+export const getCurrentChatError = createAction(ACTION_TYPES.GET_CURRENT_CHAT_ERROR);
 
 export const createNewChatRequest = (payload) => ({
   type: ACTION_TYPES.CREATE_NEW_CHAT_REQUEST,
