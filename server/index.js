@@ -1,7 +1,7 @@
 const http = require('http');
 const {Server} = require('socket.io');
 const app = require('./app');
-const {createWebSocketConnect} = require('./websocket');
+const {createWebsocketConnect} = require('./websocket');
 
 const server = http.createServer(app);
 
@@ -11,7 +11,7 @@ const io = new Server(server, {
   }
 });
 
-io.on('connection', createWebSocketConnect)
+io.on('connection', createWebsocketConnect)
 
 const PORT = 5000;
 

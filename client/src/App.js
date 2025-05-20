@@ -7,6 +7,8 @@ import {
   Route,
 } from "react-router-dom";
 // import UserContext from './contexts/UserContext';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import history from "./history";
 import "./reset.css";
 import { connect } from "react-redux";
@@ -37,34 +39,48 @@ function App(props) {
       //     props.dispatch(action);
       //   });
 
-
-      props.getUserDataRequest()
-
+      props.getUserDataRequest();
     }
   }, []);
+
+  useEffect(() => {
+    if (props.notification) {
+      const { body, createdAt, type } = props.notification;
+      toast[type](body, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [props.notification]);
 
   return (
     <>
       <Router history={history}>
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path='/messenger' element={<Dashboard />} />
+          <Route path="/messenger" element={<Dashboard />} />
         </Routes>
       </Router>
+      <ToastContainer />
       {props.error && <p>Ooops, something goes wrong</p>}
     </>
   );
 }
 
-const mapStateToProps = ({ user, error }) => ({ user, error });
+const mapStateToProps = ({ user, error, notification }) => ({ user, error, notification});
 // визначає, яка частина стора нам потрібна тут!
 
 const mapDispatch = {
-  getUserDataRequest
-}
+  getUserDataRequest,
+};
 
 export default connect(mapStateToProps, mapDispatch)(App);
-
 
 /*
  

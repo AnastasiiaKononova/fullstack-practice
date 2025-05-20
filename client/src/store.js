@@ -4,11 +4,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducers/rootReducer";
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from "./sagas/rootSaga";
+
 import chatListReducer from "./reducers/chatListReducer";
 import currentChatReducer from "./reducers/currentChatReducer";
 import errorReducer from "./reducers/errorReducer";
 import fetchingReducer from "./reducers/fetchingReducer";
 import userReducer from "./reducers/userReducer";
+import notificationReducer from "./reducers/notificationReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -25,6 +27,7 @@ const store = configureStore({
         currentChat: currentChatReducer,
         error: errorReducer,
         isFetching: fetchingReducer,
+        notification: notificationReducer,
     },
     middleware: (getDefaultMiddleware) => [...getDefaultMiddleware({thunk: false}), sagaMiddleware]
 });

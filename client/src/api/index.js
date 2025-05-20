@@ -2,6 +2,7 @@ import axios from "axios";
 import history from "../history";
 import {io} from "socket.io-client";
 import ACTION_TYPES from '../actions/actionTypes';
+import store from '../store';
 
 const httpClient = axios.create({
   baseURL: "http://localhost:5000/api",
@@ -9,9 +10,18 @@ const httpClient = axios.create({
 
 const socket = io('ws://localhost:5000');
 
-socket.on(ACTION_TYPES.NEW_NOTIFICATION, (data) => {
-  console.log(data);
+socket.on(ACTION_TYPES.NEW_NOTIFICATION, (payload) => {
+  // ми отримали нове сповіщення і нам його треба доправити до redux store 
+  store.dispatch({
+    type: ACTION_TYPES.NEW_NOTIFICATION,
+    payload
+  })
 })
+
+
+// setTimeout(() => {
+//     socket.emit('add_new_notification', 'hahaha');
+// }, 5000);
 
 httpClient.interceptors.request.use(
   (config) => {
