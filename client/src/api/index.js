@@ -1,9 +1,17 @@
 import axios from "axios";
 import history from "../history";
+import {io} from "socket.io-client";
+import ACTION_TYPES from '../actions/actionTypes';
 
 const httpClient = axios.create({
   baseURL: "http://localhost:5000/api",
 });
+
+const socket = io('ws://localhost:5000');
+
+socket.on(ACTION_TYPES.NEW_NOTIFICATION, (data) => {
+  console.log(data);
+})
 
 httpClient.interceptors.request.use(
   (config) => {

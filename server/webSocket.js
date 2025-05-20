@@ -9,4 +9,12 @@ module.exports.createWebsocketConnect = (socket) => {
   });
 
   /// TODO: створити сповіщення і надіслати його клієнту просто так без запиту
+
+  setTimeout(() => {
+    const notif = NotificationController.addNewNotification(
+      "notification text to client"
+    ).then((result) => {
+      socket.emit("new_notification", result);
+    });
+  }, 10000);
 };
