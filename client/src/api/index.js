@@ -20,6 +20,25 @@ export const sendMessage = (message) => {
   socket.emit(CONSTANTS.NEW_MESSAGE, message);
 }
 
+
+/*
+Передача по WS файлів. 
+
+Варіант 1 - текст
+1. Передача текстом. На клієнті картинка считується через FileReader() як base64-текст
+2. Надсилається як текст.
+3. На сервері зчитується  і перетворюється назад в картинку
+
+Варіант 2 - спеціалізована бібліотека для завантаження файлів по ws
+https://www.npmjs.com/package/socketio-file-upload
+
+Варіант 3 - відправляти файли окремо http-запитом
+
+
+*/
+
+
+
 httpClient.interceptors.request.use(
   (config) => {
     // NEED REFACTOR: запит іде на автоматі з заголовком application/json, а на роут додавання нового повідомлення нам потрібно заголовок multipart/form-data

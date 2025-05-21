@@ -3,9 +3,9 @@ const {Message, Chat} = require("../models");
 
 module.exports.addMessage = async (message) => {
     try {
-      const {body, chat, author} = message;
+      const {body, chat, author, imagePath} = message;
       // Треба передбачити відсутність картинок як таких
-      const newMessageInstance = await Message.create({ body, chat, author});
+      const newMessageInstance = await Message.create({ body, chat, author, imagePath});
       
       const chatInstance = await Chat.findById(chat);
       

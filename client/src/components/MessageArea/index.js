@@ -42,8 +42,8 @@ const MessageArea = (props) => {
   };
 
   const imageHandler = (event) => {
-    // imageReader(event.target.files[0]);
-    setImage(event.target.files[0]);
+    imageReader(event.target.files[0]);
+    // setImage(event.target.files[0]);
   };
 
   const dragEnter = (event) => {
