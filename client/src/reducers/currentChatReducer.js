@@ -1,6 +1,6 @@
 import ACTION_TYPES from "../actions/actionTypes";
 import {createReducer} from "@reduxjs/toolkit";
-import {getCurrentChatSuccess, addNewMessageSuccess} from '../actions/actionCreators';
+import {getCurrentChatSuccess, addMessage} from '../actions/actionCreators';
 
 const initialStates = null;
 
@@ -51,7 +51,7 @@ const initialStates = null;
 
 const currentChatReducer = createReducer(initialStates, (builder) => {
   builder
-  .addCase(addNewMessageSuccess, (state, action) => {
+  .addCase(addMessage, (state, action) => {
     const newMessage = action.payload;
     const messageAuthor = state.members.find((userObj) => userObj._id === newMessage.author);
     newMessage.author = messageAuthor;
@@ -63,10 +63,11 @@ const currentChatReducer = createReducer(initialStates, (builder) => {
     currentChat.members.forEach((user) => {
       userMap.set(user._id, user);
     });
-    state.messages = currentChat.messages.map((message) => {
+    currentChat.messages = currentChat.messages.map((message) => {
       message.author = userMap.get(message.author);
       return message;
     })
+    return currentChat;
   })
 })
 

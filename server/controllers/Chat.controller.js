@@ -13,23 +13,23 @@ module.exports.createChat = async (req, res, next) => {
   }
 };
 
-module.exports.addMessage = async (req, res, next) => {
-  try {
-    const {body, params: { chatId }, file,} = req;
-    // Треба передбачити відсутність картинок як таких
-    console.log(body);
-    console.log(file);
-    const newMessageInstance = await Message.create({ ...body, chat: chatId, imagePath: file?.filename});
-    console.log(newMessageInstance);
-    const chatInstance = await Chat.findById(chatId);
-    console.log(chatInstance);
-    chatInstance.messages.push(newMessageInstance);
-    await chatInstance.save();
-    res.status(201).send({ data: newMessageInstance });
-  } catch (error) {
-    next(error);
-  }
-};
+// module.exports.addMessage = async (req, res, next) => {
+//   try {
+//     const {body, params: { chatId }, file,} = req;
+//     // Треба передбачити відсутність картинок як таких
+//     console.log(body);
+//     console.log(file);
+//     const newMessageInstance = await Message.create({ ...body, chat: chatId, imagePath: file?.filename});
+//     console.log(newMessageInstance);
+//     const chatInstance = await Chat.findById(chatId);
+//     console.log(chatInstance);
+//     chatInstance.messages.push(newMessageInstance);
+//     await chatInstance.save();
+//     res.status(201).send({ data: newMessageInstance });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 module.exports.getAllUserChats = async (req, res, next) => {
   try {

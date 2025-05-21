@@ -1,5 +1,6 @@
 import ACTION_TYPES from "./actionTypes";
 import { createAction } from "@reduxjs/toolkit";
+import constants from "../constants";
 
 /* Auth/UserData actions */
 
@@ -72,10 +73,17 @@ export const signUpError = (error) => ({
 
 export const addNewMessageRequest = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_REQUEST);
 
-export const addNewMessageSuccess = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_SUCCESS);
+// export const addNewMessageSuccess = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_SUCCESS);
 
-export const addNewMessageError = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_ERROR);
+// export const addNewMessageError = createAction(ACTION_TYPES.ADD_NEW_MESSAGE_ERROR);
 
+
+// export const addMessage = (payload) => ({
+//   type: constants.ADD_MESSAGE_TO_CHAT,
+//   payload,
+// })
+
+export const addMessage = createAction(constants.ADD_MESSAGE_TO_CHAT);
 export const getUserChatList = () => ({
   type: ACTION_TYPES.GET_USER_CHATS_LIST_REQUEST,
 });

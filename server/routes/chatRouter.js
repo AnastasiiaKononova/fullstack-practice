@@ -7,7 +7,7 @@ chatRouter.use(checkToken);
 
 chatRouter.get("/", ChatController.getAllUserChats);
 chatRouter.post("/", ChatController.createChat);
-chatRouter.post('/:chatId', upload.single('image'), ChatController.addMessage);
+// chatRouter.post('/:chatId', upload.single('image'), ChatController.addMessage);
 chatRouter.get("/:chatId/user/:userId", ChatController.addUserToChat);
 chatRouter.get('/:chatId', ChatController.getOneChat);
 

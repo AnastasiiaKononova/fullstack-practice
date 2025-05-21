@@ -2,15 +2,14 @@ import { put } from "redux-saga/effects";
 import {
   getUserChats,
   getOneChat,
-  addNewMessage,
   createNewChat,
+  sendMessage
 } from "../api/index";
 import {
   getUserChatListError,
   getCurrentChatSuccess,
   getCurrentChatError,
-  addNewMessageSuccess,
-  addNewMessageError,
+  addNewMessageRequest,
   createNewChatSuccess,
   createNewChatError,
 } from "../actions/actionCreators";
@@ -59,16 +58,19 @@ export function* getOneChatSaga(action) {
 /// Відправку нового повідомлення (addNewMessage)
 
 export function* addNewMessageSaga(action) {
-  try {
-    console.log(action.payload);
-    const {
-      data: { data },
-    } = yield addNewMessage(action.payload);
-    yield put(addNewMessageSuccess(data));
-  } catch (error) {
-    yield put(addNewMessageError(error));
-  }
+  // try {
+  //   console.log(action.payload);
+  //   const {
+  //     data: { data },
+  //   } = yield addNewMessage(action.payload);
+  //   yield put(addNewMessageSuccess(data));
+  // } catch (error) {
+  //   yield put(addNewMessageError(error));
+  // }
+  sendMessage(action.payload);
 }
+
+
 
 export function* createChatSaga(action) {
   try {

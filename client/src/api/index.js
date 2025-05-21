@@ -3,6 +3,8 @@ import history from "../history";
 import {io} from "socket.io-client";
 import ACTION_TYPES from '../actions/actionTypes';
 import store from '../store';
+import CONSTANTS from '../constants';
+import { addMessage } from "../actions/actionCreators";
 
 const httpClient = axios.create({
   baseURL: "http://localhost:5000/api",
@@ -10,18 +12,13 @@ const httpClient = axios.create({
 
 const socket = io('ws://localhost:5000');
 
-socket.on(ACTION_TYPES.NEW_NOTIFICATION, (payload) => {
-  // ми отримали нове сповіщення і нам його треба доправити до redux store 
-  store.dispatch({
-    type: ACTION_TYPES.NEW_NOTIFICATION,
-    payload
-  })
+socket.on(CONSTANTS.ADD_MESSAGE_TO_CHAT, (newMessage) => {
+  store.dispatch(addMessage(newMessage));
 })
 
-
-// setTimeout(() => {
-//     socket.emit('add_new_notification', 'hahaha');
-// }, 5000);
+export const sendMessage = (message) => {
+  socket.emit(CONSTANTS.NEW_MESSAGE, message);
+}
 
 httpClient.interceptors.request.use(
   (config) => {
